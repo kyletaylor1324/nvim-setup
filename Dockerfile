@@ -6,14 +6,9 @@ RUN apk update && apk add --no-cache \
     ripgrep lazygit bottom fzf gcc make \
     curl go lua
 
-# Configure AstroNvim
-RUN mkdir -p /root/.config/nvim && \
-    git clone --depth 1 \
-    https://github.com/AstroNvim/template \
-    /root/.config/nvim
-
-RUN mkdir -p /root/.config/lazygit 
-
+# Configure
+COPY /config /root/.config
 
 WORKDIR /workspace
 ENTRYPOINT ["nvim"] 
+ 
