@@ -1,0 +1,30 @@
+
+# Global ignores
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Neovim specific
+.nvim/
+nvim/
+
+# Configuration files
+config.lua
+init.lua
+keybindings.lua
+plugins.lua
+
+# Plugin directories
+plugin/**
+site/** 
+pack/*/start/
+
+# Cache and log files
+log/*
+
+# IDE specific
+tags
+*.sublime-workspace
+*.vscode/settings.json
+*.vscode/extensions/*
