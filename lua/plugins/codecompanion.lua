@@ -27,7 +27,6 @@ return {
             schema = {
               model = {
                 default = "deepseek-r1:14b",
-                default = "deepseek-r1:30b",
               },
             },
             env = {
