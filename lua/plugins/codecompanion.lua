@@ -1,4 +1,4 @@
-if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
+-- if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
 return {
   "olimorris/codecompanion.nvim",
   dependencies = {
@@ -8,25 +8,16 @@ return {
   lazy = false,
   config = function()
     require("codecompanion").setup {
+      opts = {
+        system_prompt = function(opts) return nil end,
+      },
       adapters = {
-        openai = function()
-          return require("codecompanion.adapters").extend("openai", {
-            schema = {
-              model = {
-                default = "o1-preview-2024-09-12",
-              },
-            },
-            env = {
-              api_key = vim.env.OPENAI_API_KEY,
-            },
-          })
-        end,
         ollama = function()
           return require("codecompanion.adapters").extend("ollama", {
             name = "ollama",
             schema = {
               model = {
-                default = "deepseek-r1:14b",
+                default = "deepseek-r1",
               },
             },
             env = {
@@ -40,25 +31,28 @@ return {
             },
           })
         end,
-        openai_code = function()
-          return require("codecompanion.adapters").extend("openai", {
+        azure_openai = function()
+          local s = require("codecompanion.adapters").extend("openai", {
+            url = "http://localhost:2000/?resource=af-openai-nc-prod&deployment=af-openainc-o1mini-prod&api_version=2024-08-01-preview",
             schema = {
               model = {
-                default = "o1-mini-2024-09-12",
+                default = "af-openainc-o1mini-prod",
               },
             },
-            env = {
-              api_key = vim.env.OPENAI_API_KEY,
-            },
           })
+          print(vim.inspect(s))
+          return s
         end,
       },
       strategies = {
         chat = {
-          adapter = "ollama",
+          adapter = "azure_openai",
+          opts = {
+            system_prompt = false,
+          },
         },
         inline = {
-          adapter = "ollama",
+          adapter = "azure_openai",
         },
       },
       display = {
