@@ -6,10 +6,11 @@
 ---@type LazySpec
 return {
   "AstroNvim/astrocommunity",
-  { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.color.nvim-highlight-colors" },
-  { import = "astrocommunity.motion.leap-nvim" },
   { import = "astrocommunity.colorscheme.onedarkpro-nvim" },
   { import = "astrocommunity.docker.lazydocker" },
+  { import = "astrocommunity.motion.leap-nvim" },
+  { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.recipes.heirline-mode-text-statusline" },
+  { import = "astrocommunity.scrolling.mini-animate" },
 }
