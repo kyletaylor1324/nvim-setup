@@ -7,6 +7,9 @@ return {
   lazy = false,
   config = function()
     require("codecompanion").setup {
+      opts = {
+        system_prompt = function(opts) return nil end,
+      },
       adapters = {
         azure_openai = function()
           local s = require("codecompanion.adapters").extend("openai", {
