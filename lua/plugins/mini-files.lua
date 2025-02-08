@@ -29,7 +29,7 @@ return {
   },
   opts = {
     mappings = {
-      synchronize = "s",
+      -- synchronize = "s",
     },
     windows = {
       -- Maximum number of windows to show side by side
