@@ -1,14 +1,30 @@
-if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
+-- if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
 return {
   "olimorris/codecompanion.nvim",
   dependencies = {
     "nvim-lua/plenary.nvim",
-    "echasnovski/mini.nvim",
   },
   lazy = false,
   config = function()
     require("codecompanion").setup {
+      opts = {
+        system_prompt = function(opts)
+          return "You are a helpful coding assistant that is always extremely concise and to the point."
+        end,
+      },
       adapters = {
+        claude = function()
+          return require("codecompanion.adapters").extend("anthropic", {
+            schema = {
+              model = {
+                default = "claude-3-5-sonnet-latest",
+              },
+            },
+            env = {
+              api_key = vim.env.ANTHROPIC_API_KEY,
+            },
+          })
+        end,
         openai = function()
           return require("codecompanion.adapters").extend("openai", {
             schema = {
@@ -40,7 +56,7 @@ return {
             },
           })
         end,
-        openai_code = function()
+        openai_mini = function()
           return require("codecompanion.adapters").extend("openai", {
             schema = {
               model = {
@@ -55,30 +71,14 @@ return {
       },
       strategies = {
         chat = {
-          adapter = "ollama",
-        },
-        inline = {
-          adapter = "ollama",
-        },
-      },
-      display = {
-        diff = {
-          enabled = true,
-          close_chat_at = 240, -- Close an open chat buffer if the total columns of your display are less than...
-          layout = "horizontal", -- vertical|horizontal split for default provider
-          opts = { "internal", "filler", "closeoff", "algorithm:patience", "followwrap", "linematch:120" },
-          provider = "mini_diff", -- default|mini_diff
+          adapter = "claude",
         },
       },
     }
   end,
   keys = {
-    { "<leader>a", "", desc = "Code Companion" },
-    { "<leader>a", "", mode = "v", desc = "Code Companion" },
+    { "<leader>a", "", desc = "AI Tools" },
+    { "<leader>a", "", mode = "v", desc = "AI Tools" },
     { "<leader>ac", function() vim.cmd "CodeCompanionChat" end, desc = "Start Chat" },
-    { "<leader>ai", function() vim.cmd "CodeCompanion /buffer" end, desc = "Inline" },
-    { "<leader>ai", function() vim.cmd "CodeCompanion" end, mode = "v", desc = "Inline" },
-    { "<leader>af", function() vim.cmd "CodeCompanion /fix" end, mode = "v", desc = "Fix Code" },
-    { "<leader>ae", function() vim.cmd "CodeCompanion /explain" end, mode = "v", desc = "Explain Code" },
   },
 }
