@@ -8,6 +8,7 @@ return {
   "AstroNvim/astrocommunity",
   { import = "astrocommunity.color.nvim-highlight-colors" },
   { import = "astrocommunity.colorscheme.onedarkpro-nvim" },
+  { import = "astrocommunity.colorscheme.catppuccin" },
   { import = "astrocommunity.docker.lazydocker" },
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.recipes.heirline-mode-text-statusline" },
