@@ -11,6 +11,5 @@ return {
   { import = "astrocommunity.colorscheme.catppuccin" },
   { import = "astrocommunity.docker.lazydocker" },
   { import = "astrocommunity.pack.lua" },
-  { import = "astrocommunity.recipes.heirline-mode-text-statusline" },
   { import = "astrocommunity.scrolling.mini-animate" },
 }
