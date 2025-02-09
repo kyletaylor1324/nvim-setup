@@ -19,11 +19,17 @@ return {
       status.component.treesitter(),
       status.component.nav(),
     }
-
+    opts.winbar = {}
     opts.tabline = {
       status.heirline.make_buflist(status.component.tabline_file_info {
         filename = {
-          modify = ":.",
+          fname = function(nr)
+            local fullPath = vim.fn.getbufinfo(nr)[1].name
+            local dirName = vim.fn.fnamemodify(fullPath, ":p:h:t")
+            local fileName = vim.fn.fnamemodify(fullPath, ":t")
+            return dirName .. "/" .. fileName
+          end,
+          modify = "",
         },
       }),
       status.component.fill(),
