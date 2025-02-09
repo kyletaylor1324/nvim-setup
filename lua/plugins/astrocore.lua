@@ -48,4 +48,7 @@ return {
       },
     },
   },
+  require("toggleterm").setup {
+    shell = "powershell.exe",
+  },
 }
