@@ -11,6 +11,12 @@ return {
     mappings = {
       n = {
         ["<C-t>"] = { '<Cmd>execute v:count . "ToggleTerm"<CR>', desc = "Toggle terminal" },
+        ["<Leader><Leader>"] = {
+          function()
+            require("astroui.status.heirline").buffer_picker(function(bufnr) vim.api.nvim_win_set_buf(0, bufnr) end)
+          end,
+          desc = "Select buffer from tabline",
+        },
       },
       t = {
         ["<C-t>"] = { "<Cmd>ToggleTerm<CR>", desc = "Toggle terminal" },
