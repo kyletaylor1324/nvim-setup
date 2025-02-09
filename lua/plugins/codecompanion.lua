@@ -9,7 +9,13 @@ return {
     require("codecompanion").setup {
       opts = {
         system_prompt = function(opts)
-          return "You are a helpful coding assistant that is always extremely concise and to the point."
+          return "You are a helpful coding assistant that is always "
+            .. "extremely concise and to the point. Whenever I ask "
+            .. "for code you will only return the code. Whenever I "
+            .. "ask for an update to the code you will only return "
+            .. "the part of the code that has changed. If a part of "
+            .. "the code needs explaining, add a short comment inside "
+            .. "of the code."
         end,
       },
       adapters = {
