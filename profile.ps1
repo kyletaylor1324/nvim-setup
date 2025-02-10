@@ -4,9 +4,13 @@ function add {
         [string]$Value
     )
     $filePath = "$env:USERPROFILE\.$Name"
-    $list = (@($Value) + (Get-Content $filePath -ErrorAction SilentlyContinue) | Select-Object -Unique)
-    $list | Set-Content $filePath
-    return $list
+    $existing = Get-Content $filePath -ErrorAction SilentlyContinue
+    if ($existing -notcontains $Value) {
+        $list = @($Value) + $existing
+        $list | Set-Content $filePath
+        return $list
+    }
+    return $existing
 }
 
 function get {
